@@ -1,0 +1,5 @@
+{
+  "python.defaultInterpreterPath": "/home/tai/furniture_music/stable-audio-3/.venv/bin/python",
+  "jupyter.kernels.excludePythonEnvironments": false,
+  "notebook.defaultFormatter": "ms-python.python"
+}
