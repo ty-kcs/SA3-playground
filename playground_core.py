@@ -7,6 +7,8 @@ import torch
 from audio_util import TARGET_SR, normalize, to_init_tuple
 from rf_inversion_sa3 import invert_and_edit_sa3
 
+DEFAULT_SEED = 1234
+
 _MODEL_CACHE: dict[str, object] = {}
 
 
@@ -31,7 +33,7 @@ def run_ia(
     prompt: str,
     steps: int,
     cfg: float,
-    seed: int,
+    seed: int = DEFAULT_SEED,
 ) -> torch.Tensor:
     wav = normalize(wav)
     duration = _duration_from_wav(wav)
@@ -58,7 +60,7 @@ def run_inpaint(
     duration: float,
     steps: int,
     cfg: float,
-    seed: int,
+    seed: int = DEFAULT_SEED,
 ) -> torch.Tensor:
     wav = normalize(wav)
     init = to_init_tuple(wav)
@@ -108,7 +110,7 @@ def _build_sigmas(model, latent, steps: int) -> torch.Tensor:
     )
 
 
-def run_inversion_sanity(model, wav: torch.Tensor, *, seed: int = 1234) -> torch.Tensor:
+def run_inversion_sanity(model, wav: torch.Tensor, *, seed: int = DEFAULT_SEED) -> torch.Tensor:
     """Fixed-params round-trip: empty prompt, gamma=0, eta=0."""
     latent, _duration = _encode_latent(model, wav)
     steps = 50
@@ -143,7 +145,7 @@ def run_inversion_edit(
     cfg: float,
     inv_steps: int,
     samp_steps: int,
-    seed: int,
+    seed: int = DEFAULT_SEED,
 ) -> torch.Tensor:
     latent, _duration = _encode_latent(model, wav)
     sigmas = _build_sigmas(model, latent, inv_steps)

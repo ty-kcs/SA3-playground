@@ -11,6 +11,23 @@ import torchaudio
 TARGET_SR = 44100
 
 
+def parse_file_upload(value) -> tuple[str | None, bytes | None]:
+    """Return (filename, bytes) from ipywidgets FileUpload.value, or (None, None)."""
+    if not value:
+        return None, None
+    if isinstance(value, (list, tuple)):
+        entry = value[0]
+        content = entry["content"]
+        if hasattr(content, "tobytes"):
+            content = content.tobytes()
+        return entry.get("name", "upload.wav"), content
+    name = next(iter(value))
+    content = value[name]["content"]
+    if hasattr(content, "tobytes"):
+        content = content.tobytes()
+    return name, content
+
+
 def load_uploaded_wav(data: bytes, target_sr: int = TARGET_SR) -> tuple[torch.Tensor, int]:
     """Load WAV bytes as float stereo tensor [channels, samples]."""
     wav, sr = torchaudio.load(io.BytesIO(data))
