@@ -1,0 +1,7 @@
+einops>=0.8.2
+safetensors>=0.7.0
+huggingface-hub>=1.7.1
+transformers>=5.8.0
+soundfile>=0.13.1
+tqdm>=4.67.3
+ipywidgets>=8.0.0
