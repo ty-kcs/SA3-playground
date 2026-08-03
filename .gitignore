@@ -1,2 +1,9 @@
 # Notebook lives on Google Drive (restricted share) — not in git
 sa3_playground.ipynb
+
+# Colab dependency tuning (local / experimental — not in git)
+requirements.txt
+simulate_colab.sh
+verify_env.py
+colab_bootstrap.py
+.colab-sim/
