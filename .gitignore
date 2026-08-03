@@ -1,6 +1,11 @@
 # Notebook lives on Google Drive (restricted share) — not in git
 sa3_playground.ipynb
 
+# Editor / Python cache
+.vscode/
+__pycache__/
+*.py[cod]
+
 # Colab dependency tuning (local / experimental — not in git)
 requirements.txt
 simulate_colab.sh
